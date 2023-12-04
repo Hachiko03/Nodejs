@@ -1,11 +1,10 @@
 import * as dotenv from "dotenv";
-import passport from "passport";
-import passportJWT from "passport-jwt";
+dotenv.config();
+import * as passport from "passport";
+import * as passportJWT from "passport-jwt";
 import { db } from "./db";
 
 const { SECRET } = process.env;
-
-dotenv.config();
 
 passport.use(
   new passportJWT.Strategy(
