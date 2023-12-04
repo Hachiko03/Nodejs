@@ -8,7 +8,9 @@ import {
   createImage,
 } from "./controllers/controlers";
 import * as multer from "multer";
-import { logIn, signUp } from "./controllers/users";
+import { logIn, signUp ,logOut} from "./controllers/users";
+import authorize from "./authorize";
+import "./passport"
 
 const express = require("express");
 const morgan = require("morgan");
@@ -42,7 +44,10 @@ app.delete("/api/planets/:id", validacionDePlaneta, deleteById);
 app.post("/api/planets/:id/image", upload.single("image"), createImage);
 
 app.post("/api/users/login", logIn);
+
 app.post("/api/users/signup", signUp);
+
+app.get("/api/users/logout",authorize, logOut);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

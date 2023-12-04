@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUp = exports.logIn = void 0;
+exports.logOut = exports.signUp = exports.logIn = void 0;
 var db_1 = require("../db");
 var jwt = require("jsonwebtoken");
 var dotenv = require("dotenv");
@@ -92,3 +92,18 @@ var signUp = function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 exports.signUp = signUp;
+var logOut = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                user = req.user;
+                return [4 /*yield*/, db_1.db.none("UPDATE users SET token=$2 WHERE id=$1", [user === null || user === void 0 ? void 0 : user.id, null])];
+            case 1:
+                _a.sent();
+                res.status(200).json({ msg: "Logout" });
+                return [2 /*return*/];
+        }
+    });
+}); };
+exports.logOut = logOut;

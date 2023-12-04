@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var controlers_1 = require("./controllers/controlers");
 var multer = require("multer");
 var users_1 = require("./controllers/users");
+var authorize_1 = require("./authorize");
+require("./passport");
 var express = require("express");
 var morgan = require("morgan");
 var app = express();
@@ -26,6 +28,7 @@ app.delete("/api/planets/:id", controlers_1.validacionDePlaneta, controlers_1.de
 app.post("/api/planets/:id/image", upload.single("image"), controlers_1.createImage);
 app.post("/api/users/login", users_1.logIn);
 app.post("/api/users/signup", users_1.signUp);
+app.get("/api/users/logout", authorize_1.default, users_1.logOut);
 app.listen(port, function () {
     console.log("http://localhost:".concat(port));
 });
